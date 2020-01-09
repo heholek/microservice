@@ -1,0 +1,13 @@
+{
+  "name": "listing-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "watch": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}

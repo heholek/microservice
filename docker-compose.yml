@@ -1,0 +1,27 @@
+version: "3"
+services:
+  listing-api:
+    build: "./listing-api"
+    depends_on:
+      - listing-api-db
+    volumes:
+      - ./listing-api:/opt/app
+
+  listing-api-db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db
+    image: mysql:5.7.20
+
+  users-api:
+    build: "./users-api"
+    depends_on:
+      - users-api-db
+    volumes:
+      - ./users-api:/opt/app
+
+  users-api-db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db
+    image: mysql:5.7.20
