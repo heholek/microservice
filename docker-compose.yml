@@ -6,6 +6,8 @@ services:
             - listing-api-db
         environment:
             - DB_URI=mysql://root:password@listing-api-db/db?charset=UTF8
+        ports:
+            - 7100:7100
         volumes:
             - ./listing-api:/opt/app
 
@@ -23,6 +25,8 @@ services:
             - users-api-db
         environment:
             - DB_URI=mysql://root:password@users-api-db/db?charset=UTF8
+        ports:
+            - 7101:7101
         volumes:
             - ./users-api:/opt/app
 
