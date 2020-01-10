@@ -1,27 +1,35 @@
 version: "3"
 services:
-  listing-api:
-    build: "./listing-api"
-    depends_on:
-      - listing-api-db
-    volumes:
-      - ./listing-api:/opt/app
+    listing-api:
+        build: "./listing-api"
+        depends_on:
+            - listing-api-db
+        environment:
+            - DB_URI=mysql://root:password@listing-api-db/db?charset=UTF8
+        volumes:
+            - ./listing-api:/opt/app
 
-  listing-api-db:
-    environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=db
-    image: mysql:5.7.20
+    listing-api-db:
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_DATABASE=db
+        image: mysql:5.7.20
+        ports:
+            - 192.168.99.100:7200:3306
 
-  users-api:
-    build: "./users-api"
-    depends_on:
-      - users-api-db
-    volumes:
-      - ./users-api:/opt/app
+    users-api:
+        build: "./users-api"
+        depends_on:
+            - users-api-db
+        environment:
+            - DB_URI=mysql://root:password@users-api-db/db?charset=UTF8
+        volumes:
+            - ./users-api:/opt/app
 
-  users-api-db:
-    environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=db
-    image: mysql:5.7.20
+    users-api-db:
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_DATABASE=db
+        image: mysql:5.7.20
+        ports:
+            - 192.168.99.100:7201:3306

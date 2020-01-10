@@ -1,13 +1,20 @@
 {
-  "name": "users-api",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "watch": "nodemon src/index.js"
-  },
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "nodemon": "^2.0.2"
-  }
+    "name": "users-api",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "watch": "nodemon src/index.js",
+        "db:migrate": "sequelize db:migrate",
+        "db:migrate:undo": "sequelize db:migrate:undo"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "mysql2": "^2.1.0",
+        "sequelize": "^5.21.3",
+        "sequelize-cli": "^5.5.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.2"
+    }
 }
