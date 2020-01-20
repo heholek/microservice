@@ -1,8 +1,11 @@
+import "@babel/polyfill"
 import React from "react"
 import { render } from "react-dom"
 import Root from "./components/Root"
-import { createGlobalStyl,ThemeProvider } from "styled-components"
+import { createGlobalStyle, ThemeProvider } from "styled-components"
 import * as theme from "./theme"
+import { ApolloProvider } from "react-apollo"
+import graphClient from "#src/api/graphqlClient"
 
 const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
@@ -18,9 +21,11 @@ const GlobalStyle = createGlobalStyle`
 `
 
 render(
-    <>
-        <GlobalStyle />
-        <Root />
-    </>,
+    <ApolloProvider client={graphClient}>
+        <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <Root />
+        </ThemeProvider>
+    </ApolloProvider>,
     document.getElementById("app")
 )

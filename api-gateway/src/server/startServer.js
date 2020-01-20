@@ -6,6 +6,7 @@ const express = require("express")
 const resolvers = require("@src/graphql/resolvers")
 const typeDefs = require("@src/graphql/typeDefs")
 const formatGraphQLErrors = require("@src/server/formatGraphQLErrors")
+const injectSession = require("./injectSession")
 
 const PORT = process.env.PORT || 7000
 
@@ -24,7 +25,7 @@ app.use(
         credentials: true
     })
 )
-
+app.use(injectSession)
 apolloServer.applyMiddleware({ app: app, cors: false, path: "/graphql" })
 
 app.listen(PORT, () => {

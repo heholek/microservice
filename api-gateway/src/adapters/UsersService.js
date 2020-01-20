@@ -19,4 +19,17 @@ module.exports = class UsersService {
             .json()
         return body
     }
+    static async fectherUser({ userId }) {
+        const body = await got
+            .get(`${USERS_SERVICE_URI}/users/${userId}`)
+            .json()
+        return body
+    }
+
+    static async fetchUserSession({ sessionId }) {
+        const body = await got
+            .get(`${USERS_SERVICE_URI}/sessions/${sessionId}`)
+            .json()
+        return body
+    }
 }

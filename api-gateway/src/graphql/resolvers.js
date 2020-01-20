@@ -5,6 +5,10 @@ module.exports = {
     Query: {
         async listings(obj, args, context, info) {
             return await ListingService.fetchAllListings()
+        },
+        async userSession(obj, args, context, info) {
+            if (args.me !== true) throw new Error("Unsuported")
+            return context.res.locals.userSession
         }
     },
     Mutation: {
@@ -17,6 +21,13 @@ module.exports = {
                 httpOnly: true
             })
             return userSession
+        }
+    },
+    UserSession: {
+        user: async userSession => {
+            return await UsersService.fectherUser({
+                userId: userSession.userID
+            })
         }
     }
 }

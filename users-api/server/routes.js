@@ -33,6 +33,15 @@ const setupRoutes = app => {
             return next(error)
         }
     })
+    app.get("/sessions/:sessionId", async (req, res, next) => {
+        try {
+            const userSession = await UserSession.findByPk(req.params.sessionId)
+            if (!userSession) return next(new Error("Invalid session"))
+            return res.json(userSession)
+        } catch (error) {
+            next(error)
+        }
+    })
 
     app.post("/users", async (req, res, next) => {
         if (!req.body.email || !req.body.password)
@@ -44,6 +53,16 @@ const setupRoutes = app => {
                 passwordHash: hashPassword(req.body.password)
             })
             return res.json(newUSer)
+        } catch (error) {
+            return next(error)
+        }
+    })
+
+    app.get("/users/:userId", async (req, res, next) => {
+        try {
+            const user = await User.findByPk(req.params.userId)
+            if (!user) return next(new Error("User not found by id"))
+            return res.json(user)
         } catch (error) {
             return next(error)
         }
