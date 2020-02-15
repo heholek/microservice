@@ -21,6 +21,11 @@ module.exports = {
                 httpOnly: true
             })
             return userSession
+        },
+        async deleteUserSession(obj, args, context, info) {
+            await UsersService.deleteUserSession(args)
+            context.res.clearCookie("userSessionId")
+            return true
         }
     },
     UserSession: {
